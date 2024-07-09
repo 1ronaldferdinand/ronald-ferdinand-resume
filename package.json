@@ -1,6 +1,6 @@
 {
 	"packageManager": "pnpm",
-	"name": "social-media-links-page",
+	"name": "ronald-ferdinand-portfolio",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -18,7 +18,8 @@
 		"@fortawesome/free-solid-svg-icons": "^6.2.0",
 		"@fortawesome/vue-fontawesome": "^3.0.1",
 		"core-js": "^3.25.5",
-		"vue": "^3.2.41"
+		"vue": "^3.2.41",
+		"vue-router": "^4.0.13"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.19.6",
@@ -36,11 +37,19 @@
 		"env": {
 			"node": true
 		},
-		"extends": ["plugin:vue/vue3-essential", "eslint:recommended"],
+		"extends": [
+			"plugin:vue/vue3-essential",
+			"eslint:recommended"
+		],
 		"parserOptions": {
 			"parser": "@babel/eslint-parser"
 		},
 		"rules": {}
 	},
-	"browserslist": ["> 1%", "last 2 versions", "not dead", "not ie 11"]
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead",
+		"not ie 11"
+	]
 }

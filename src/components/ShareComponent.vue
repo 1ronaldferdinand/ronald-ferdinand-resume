@@ -114,7 +114,7 @@ export default {
 .float-container {
     position: fixed;
     top: 2rem;
-    right: calc(100vw - 90% - 1rem);
+    left: calc(100vw - 90% - 1rem);
     z-index: 99;
 }
 

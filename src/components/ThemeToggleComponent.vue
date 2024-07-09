@@ -19,7 +19,15 @@ export default {
     methods: {
         switchTheme(e) {
             const toggleInput = document.getElementById('checkbox');
-            const isDark = e?.target.checked || toggleInput?.checked;
+            let isDark = e?.target.checked || toggleInput?.checked;
+
+            if(!e){
+                isDark = this.theme == 'dark';
+                if (toggleInput) {
+                    toggleInput.checked = isDark;
+                }
+            }
+
             if (isDark) {
                 this.theme = 'dark';
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -27,11 +35,15 @@ export default {
             } else {
                 this.theme = 'light';
                 document.documentElement.setAttribute('data-theme', this.theme);
+                localStorage.setItem('theme', 'light');
             }
         }
     },
     async created() {
-        this.switchTheme();
+        // Ensure the DOM is fully loaded before running switchTheme
+        this.$nextTick(() => {
+            this.switchTheme();
+        });
     }
 };
 </script>
@@ -44,7 +56,8 @@ export default {
     align-items: center;
     top: 1.5rem;
     height: 2rem;
-    right: calc(100vw - 10% - 2rem);
+    left: calc(100vw - 10% - 2rem);
+    z-index: 9999;
 }
 
 .theme-switch-wrapper em {

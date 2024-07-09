@@ -19,3 +19,28 @@
   --box-shadow-top-color: #253544;
   --box-shadow-bottom-color: #33475c;
 }
+
+body {
+  margin: 0;
+  display: flex;
+  padding: 4rem 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-gradient);
+  color: var(--font-color);
+  transition: background 0.5s ease;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.light-theme {
+  --bg-gradient: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.dark-theme {
+  --bg-gradient: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+}

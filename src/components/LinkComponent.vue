@@ -1,44 +1,38 @@
 <template>
-    <a class="card-link hover-paint" @mouseover="hovering = true" @mouseout="hovering = false" :href="url" target="_blank" rel="noopener noreferrer">
+    <router-link 
+      class="card-link hover-paint" 
+      @mouseover="hovering = true" 
+      @mouseout="hovering = false" 
+      :to="url"
+    >
         <img class="link-img" width="20" height="20" :src="image" />
         <p class="link-title">{{ title }}</p>
-    </a>
+    </router-link>
 </template>
-
+  
 <script>
-import { ref } from 'vue';
-
 export default {
     name: 'LinkComponent',
-    setup() {
-        const hovering = ref(false);
-
-        return {
-            hovering
-        };
-    },
     props: {
-        image: String,
-        title: String,
-        url: String
-    },
-    methods: {
-        shareDialog() {
-            if (navigator.share) {
-                navigator
-                    .share({
-                        title: this.title,
-                        text: this.title,
-                        url: this.url
-                    })
-                    .then(() => console.log('Successful share'))
-                    .catch((error) => console.log('Error sharing', error));
-            } else {
-                console.log('Share not supported');
-            }
+        url: {
+            type: String,
+            required: true
+        },
+        image: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
         }
+    },
+    data() {
+        return {
+            hovering: false
+        };
     }
-};
+}
 </script>
 
 <style>
@@ -138,7 +132,7 @@ export default {
     width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .card-link {
         min-width: 80%;
     }
