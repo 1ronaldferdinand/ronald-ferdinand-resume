@@ -27,6 +27,7 @@
   
   <style scoped>
   .notification {
+    z-index: 999999;
     position: fixed;
     top: 20px;
     right: 20px;
