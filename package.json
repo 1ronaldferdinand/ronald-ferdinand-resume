@@ -1,5 +1,5 @@
 {
-	"packageManager": "pnpm",
+	"packageManager": "pnpm@8.0.0",
 	"name": "ronald-ferdinand-portfolio",
 	"version": "0.1.0",
 	"private": true,
