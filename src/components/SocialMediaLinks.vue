@@ -121,6 +121,16 @@ export default {
             ],
             exps: [
                 { 
+                    title: "Full-Stack Web Developer", 
+                    company: "PT Imtek Media Data - Yogyakarta, ID",
+                    date: "Agustus 2024 - Sekarang",
+                    description: [
+                        'Merancang dan menerapkan API untuk mendukung fungsionalitas aplikasi.',
+                        'Mengembangkan dan memelihara aplikasi web menggunakan JavaScript, HTML, CSS, PHP, dan Vue.js.',
+                        'Mengelola dan mengoptimalkan basis data PostgreSQL.'
+                    ]
+                },
+                { 
                     title: "Web Engineer", 
                     company: "PT Gamatechno Indonesia - Yogyakarta, ID",
                     date: "Juli 2023 - Juli 2024",
@@ -152,7 +162,7 @@ export default {
                 },
                 { 
                     title: "Computer Lab Assistant", 
-                    company: "Universitas AMIKOM Yogyakarta - Yogyakarta, ID",
+                    company: "Universitas Amikom Yogyakarta - Yogyakarta, ID",
                     date: "March 2021 – August 2021",
                     description: [
                         'Membantu dosen di laboratorium dengan menjelaskan dan membimbing mahasiswa selama perkuliahan.',
@@ -164,7 +174,7 @@ export default {
             studies: [
                 { 
                     title: "Sarjana Informatika", 
-                    company: "Universtias AMIKOM Yogyakarta",
+                    company: "Universtias Amikom Yogyakarta",
                     date: "September 2018 - Oktober 2022",
                     description: [
                         'GPA : 3.86'
