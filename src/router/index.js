@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/pages/Home';
-import KasdanaPage from '@/pages/projects/KasdanaPage';
-import WorxspacePage from '@/pages/projects/WorxspacePage.vue';
-import DelapanBelasHolePage from '@/pages/projects/DelapanBelasHolePage.vue';
-import FrontdeskPage from '@/pages/projects/FrontdeskPage.vue';
-import HmifPage from '@/pages/projects/HmifPage.vue';
+import ProjectDetail from '@/pages/ProjectDetail.vue';
+import AdminLogin from '@/pages/admin/Login.vue';
+import AdminDashboard from '@/pages/admin/Dashboard.vue';
 
 const routes = [
   {
@@ -12,24 +10,17 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/projects/kasdana',
-    component: KasdanaPage
+    path: '/projects/:slug',
+    component: ProjectDetail
   },
   {
-    path: '/projects/worxspace',
-    component: WorxspacePage
+    path: '/admin/login',
+    component: AdminLogin
   },
   {
-    path: '/projects/18hole',
-    component: DelapanBelasHolePage
-  },
-  {
-    path: '/projects/frontdesk',
-    component: FrontdeskPage
-  },
-  {
-    path: '/projects/hmif',
-    component: HmifPage
+    path: '/admin/dashboard',
+    component: AdminDashboard,
+    meta: { requiresAuth: true }
   }
 ];
 

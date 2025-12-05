@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <h2 class="title" style="margin: 0px;">{{ name }}</h2>
-        <h3 class="title" style="margin: 16px 0px 8px 0px;">{{ title }}</h3>
-        <p class="description" style="margin: 0px; font-size: 14px;">
-            {{ description_id }}
+        <h2 class="title" style="margin: 0px;" data-aos="fade-down">{{ profile.name }}</h2>
+        <h3 class="title" style="margin: 16px 0px 8px 0px;" data-aos="fade-down" data-aos-delay="100">{{ profile.title }}</h3>
+        <p class="description" style="margin: 0px; font-size: 14px;" data-aos="fade-in" data-aos-delay="200">
+            {{ profile.description_id }}
         </p>
 
-        <h3 class="subtitle" style="margin: 32px 0px 16px 0px;">My Skills</h3>
-        <div class="skill-container">   
+        <h3 class="subtitle" style="margin: 32px 0px 16px 0px;" data-aos="fade-right">My Skills</h3>
+        <div class="skill-container" data-aos="zoom-in">   
             <div class="tech-stack">
                 <fa-icon icon="fa-brands fa-php"/>
                 <p>PHP</p>
@@ -38,10 +38,10 @@
             </div>
         </div>
         
-        <h3 class="subtitle" style="margin: 16px 0px;">My Experiences</h3>
+        <h3 class="subtitle" style="margin: 16px 0px;" data-aos="fade-right">My Experiences</h3>
         <div class="exp-container" style="width: 100%;">
             <ExpComponent 
-                v-for="(exp, index) in exps"
+                v-for="(exp, index) in profile.experiences"
                 :key="'exp-' + index"
                 :title="exp.title"
                 :company="exp.company"
@@ -49,10 +49,10 @@
                 :description="exp.description"/>
         </div>
 
-        <h3 class="subtitle" style="margin: 16px 0px;">My Educations</h3>
+        <h3 class="subtitle" style="margin: 16px 0px;" data-aos="fade-right">My Educations</h3>
         <div class="exp-container" style="width: 100%;">
             <ExpComponent 
-                v-for="(study, index) in studies"
+                v-for="(study, index) in profile.education"
                 :key="'study-' + index"
                 :title="study.title"
                 :company="study.company"
@@ -60,10 +60,10 @@
                 :description="study.description"/>
         </div>
 
-        <h3 class="subtitle" style="margin: 32px 0px 16px 0px;">My Project Portfolios</h3>
+        <h3 class="subtitle" style="margin: 32px 0px 16px 0px;" data-aos="fade-right">My Project Portfolios</h3>
         <div class="link-container" style="width: 100%;">
             <LinkComponent
-            v-for="(link, index) in links"
+            v-for="(link, index) in projects"
             :key="'link-' + index"
             :image="link.image"
             :title="link.title"
@@ -71,8 +71,8 @@
             />
         </div>
         
-        <h3 class="subtitle" style="margin-top: 32px;">Contact Me</h3>
-        <span @click="copyToClipboard" style="cursor: pointer; margin: 16px 0px;">{{ email }}</span>
+        <h3 class="subtitle" style="margin-top: 32px;" data-aos="fade-up">Contact Me</h3>
+        <span @click="copyToClipboard" style="cursor: pointer; margin: 16px 0px;" data-aos="flip-up">{{ profile.email }}</span>
         <div class="links-display">
             <div class="social-link-container">
                 <a class="social-link" href="https://github.com/1ronaldferdinand" target="_blank" rel="noopener noreferrer">
@@ -99,11 +99,14 @@ import ExpComponent from './ExpComponent.vue';
 export default {
     name: 'SocialMediaLinks',
     props: {
-        title: String,
-        description_en: String,
-        description_id: String,
-        name: String,
-        email: String
+        profile: {
+            type: Object,
+            default: () => ({})
+        },
+        projects: {
+            type: Array,
+            default: () => []
+        }
     },
     components: {
         LinkComponent,
@@ -112,80 +115,12 @@ export default {
     },
     data() {
         return {
-            links: [
-                { image: "/projects-logo/worxspace.ico", title: "Worxspace", url: "/projects/worxspace" },
-                { image: "/projects-logo/kasdana.ico", title: "Kasdana", url: "/projects/kasdana" },
-                { image: "/projects-logo/18hole.ico", title: "18 Hole", url: "/projects/18hole" },
-                { image: "/projects-logo/frontdesk.png", title: "Frontdesk", url: "/projects/frontdesk" },
-                { image: "/projects-logo/hmif.ico", title: "HMIF Dashboard", url: "/projects/hmif" }
-            ],
-            exps: [
-                { 
-                    title: "Full-Stack Web Developer", 
-                    company: "PT Imtek Media Data - Yogyakarta, ID",
-                    date: "Agustus 2024 - Sekarang",
-                    description: [
-                        'Merancang dan menerapkan API untuk mendukung fungsionalitas aplikasi.',
-                        'Mengembangkan dan memelihara aplikasi web menggunakan JavaScript, HTML, CSS, PHP, dan Vue.js.',
-                        'Mengelola dan mengoptimalkan basis data PostgreSQL.'
-                    ]
-                },
-                { 
-                    title: "Web Engineer", 
-                    company: "PT Gamatechno Indonesia - Yogyakarta, ID",
-                    date: "Juli 2023 - Juli 2024",
-                    description: [
-                        'Membuat dan mengembangkan aplikasi berbasis web berdasarkan spesifikasi desain dengan perhatian yang kuat terhadap detail, menggunakan Laravel dan VueJs.',
-                        'Melakukan debug dan menyelesaikan masalah secara efisien untuk memastikan kinerja code secara optimal.',
-                        'Mengoptimalkan dan meningkatkan tampilan aplikasi web agar responsif di semua perangkat.'
-                    ]
-                },
-                { 
-                    title: "Fellow Full-Stack Web Developer", 
-                    company: "PT Gamatechno Indonesia - Yogyakarta, ID",
-                    date: "Januari 2023 – Juli 2023",
-                    description: [
-                        'Merancang dan mengimplementasikan API untuk mendukung fungsionalitas web dan seluler.',
-                        'Mengembangkan dan memelihara aplikasi web menggunakan JavaScript, HTML, CSS, PHP, dan Vue.js.',
-                        'Mengelola dan mengoptimalkan database MySQL.'
-                    ]
-                },
-                { 
-                    title: "Intern Front-End Web Developer", 
-                    company: "PT Gamatechno Indonesia - Yogyakarta, ID",
-                    date: "September 2022 – Januari 2023",
-                    description: [
-                        'Membantu dalam mengembangkan dan memelihara komponen front-end aplikasi web menggunakan Laravel dan VueJs.',
-                        'Mengonversi maket desain menjadi halaman web yang fungsional.',
-                        'Menggunakan sistem kontrol versi seperti Git untuk manajemen kode dan kolaborasi.'
-                    ]
-                },
-                { 
-                    title: "Computer Lab Assistant", 
-                    company: "Universitas Amikom Yogyakarta - Yogyakarta, ID",
-                    date: "March 2021 – August 2021",
-                    description: [
-                        'Membantu dosen di laboratorium dengan menjelaskan dan membimbing mahasiswa selama perkuliahan.',
-                        'Evaluasi pengetahuan Query SQL siswa melalui tugas praktik.',
-                        'Dipercayakan sebagai koordinator asisten dosen pada mata kuliah ini.'
-                    ]
-                },
-            ],
-            studies: [
-                { 
-                    title: "Sarjana Informatika", 
-                    company: "Universtias Amikom Yogyakarta",
-                    date: "September 2018 - Oktober 2022",
-                    description: [
-                        'GPA : 3.86'
-                    ]
-                },
-            ],
+           // Data moved to props
         };
     },
     methods: {
         copyToClipboard() {
-            const textToCopy = this.email;
+            const textToCopy = this.profile.email;
             navigator.clipboard.writeText(textToCopy).then(() => {
                 this.$refs.notification.show("Teks berhasil disalin ke clipboard");
             }).catch(err => {

@@ -9,55 +9,75 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 /* import specific icons */
-import { 
-    faFacebook, 
-    faInstagram, 
-    faWhatsapp, 
-    faGithub, 
-    faLinkedin, 
-    faTwitter, 
+import {
+    faFacebook,
+    faInstagram,
+    faWhatsapp,
+    faGithub,
+    faLinkedin,
+    faTwitter,
     faFacebookMessenger,
-    faLaravel, 
-    faPhp, 
-    faVuejs, 
-    faHtml5, 
-    faCss3Alt, 
+    faLaravel,
+    faPhp,
+    faVuejs,
+    faHtml5,
+    faCss3Alt,
     faJs,
 } from '@fortawesome/free-brands-svg-icons';
 
-import { 
-    faChevronRight, 
-    faCopy, 
-    faEnvelope, 
-    faShare, 
-    faX, 
-    faDatabase 
+import {
+    faChevronRight,
+    faCopy,
+    faEnvelope,
+    faShare,
+    faX,
+    faDatabase
 } from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
 library.add(
-    faFacebook, 
-    faInstagram, 
-    faWhatsapp, 
-    faGithub, 
-    faLinkedin, 
-    faTwitter, 
-    faFacebookMessenger, 
-    faEnvelope, 
-    faX, 
-    faChevronRight, 
-    faCopy, 
+    faFacebook,
+    faInstagram,
+    faWhatsapp,
+    faGithub,
+    faLinkedin,
+    faTwitter,
+    faFacebookMessenger,
+    faEnvelope,
+    faX,
+    faChevronRight,
+    faCopy,
     faShare,
-    faLaravel, 
-    faPhp, 
-    faVuejs, 
-    faHtml5, 
-    faCss3Alt, 
-    faJs, 
+    faLaravel,
+    faPhp,
+    faVuejs,
+    faHtml5,
+    faCss3Alt,
+    faJs,
     faDatabase
 );
 
 const app = createApp(App);
 app.component('fa-icon', FontAwesomeIcon);
 app.use(router);
+
+// AOS Animation
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+// Meta Tags
+import { createHead } from '@vueuse/head';
+const head = createHead();
+app.use(head);
+
 app.mount('#app');
+
+// Initialize AOS after mount
+setTimeout(() => {
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+}, 500);

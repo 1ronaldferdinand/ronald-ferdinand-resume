@@ -1,25 +1,26 @@
-<template>
     <div ref="content">
         <ThemeToggleComponent />
-        <SocialMediaLinks :name="name" :email="email" :title="title" :description_id="description_id" :description_en="description_en" />
+        <div v-if="loading" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+            <p>Loading...</p>
+        </div>
+        <SocialMediaLinks v-else :profile="profile" :projects="projects" />
         <button v-if="showScrollBtn" class="scroll-btn" @click="scrollToBottom">Contact Me</button>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 import SocialMediaLinks from '../components/SocialMediaLinks.vue';
 import ThemeToggleComponent from '../components/ThemeToggleComponent.vue';
+import { useHead } from '@vueuse/head';
 
 export default {
     name: 'App',
     data() {
         return {
-            name: "Ronald Ferdinand",
-            email: "mail.ronaldferdinand@gmail.com",
-            title: "Web Developer / Software Engineer / Full Stack Developer",
-            description_en: "An engineer who is experienced in developing web-based applications, using PHP Laravel and VueJS technology. Capable of rapid learning and dedicated to continuous self-improvement, aiming for excellence in programming. Confident in delivering successful and innovative solutions.",
-            description_id: "Seorang developer yang berpengalaman dalam mengembangkan aplikasi berbasis web, menggunakan teknologi PHP Laravel dan VueJS. Mampu belajar dengan cepat dan berkomitmen untuk terus-menerus meningkatkan diri, bertujuan untuk unggul dalam pemrograman. Percaya diri dalam memberikan solusi yang sukses dan inovatif.",
-
+            profile: {},
+            projects: [],
+            loading: true,
             showScrollBtn: true,
             contentHeight: 0,
             windowHeight: 0
@@ -29,11 +30,26 @@ export default {
         SocialMediaLinks,
         ThemeToggleComponent
     },
-    mounted() {
+    async mounted() {
+        try {
+            const [profileRes, projectsRes] = await Promise.all([
+                axios.get('/api/profile'),
+                axios.get('/api/projects')
+            ]);
+            this.profile = profileRes.data;
+            this.projects = projectsRes.data;
+        } catch (error) {
+            console.error('Failed to fetch data', error);
+        } finally {
+            this.loading = false;
+        }
+
         this.$nextTick(() => {
-            this.contentHeight = this.$refs.content.clientHeight;
-            this.windowHeight = window.innerHeight;
-            window.addEventListener('scroll', this.handleScroll);
+            if (this.$refs.content) {
+                this.contentHeight = this.$refs.content.clientHeight;
+                this.windowHeight = window.innerHeight;
+                window.addEventListener('scroll', this.handleScroll);
+            }
         });
     },
     unmounted() {
@@ -55,6 +71,16 @@ export default {
                 this.showScrollBtn = true;
             }
         }
+    },
+    setup() {
+        useHead({
+            title: 'Ronald Ferdinand - Full Stack Developer',
+            meta: [
+                { name: 'description', content: 'Portfolio of Ronald Ferdinand, a Full Stack Developer specialized in Vue.js and Laravel.' },
+                { property: 'og:title', content: 'Ronald Ferdinand - Portfolio' },
+                { property: 'og:description', content: 'Check out my projects and skills.' }
+            ]
+        });
     }
 };
 </script>
